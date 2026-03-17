@@ -1,37 +1,45 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Runtime.CompilerServices;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using UnityEngine.UIElements;
 
-public class PlayerController : MonoBehaviour
+public class PlayerController1 : MonoBehaviour
 {
     public float speed = 20f;
     public float xRange = 15f;
     public GameObject projectilePrefab;
     private float horizontalInput;
-    private InputActionAsset inputActions;
 
-    private InputAction Pause;
+    public InputActionAsset InputActions;
+    private InputAction moveAction;
+    private InputAction fireAction;
+    private InputAction pausaActionPlayer;
+    private InputAction pausaActionUI;
+    public GameObject painel;
 
-    public GameObject Panel;
-
-    void Start()
+    // Update is called once per frame  
+    private void OnEnable()
     {
-        Pause = InputSystem.actions.FindAction("Pause");
+        InputActions.FindActionMap("Player").Enable();
     }
-    // Update is called once per frame
+    private void OnDisable()
+    {
+        InputActions.FindActionMap("Player").Disable(); 
+    }
+    
+    private void Awake()
+    {
+        moveAction = InputSystem.actions.FindAction("Move");
+        fireAction = InputSystem.actions.FindAction("Jump");
+        pausaActionPlayer = InputSystem.actions.FindAction("Pausa");
+        pausaActionUI = InputSystem.actions.FindAction("UIPausa");
+    }
     void Update()
     {
-
-        float horizontalInput = Pause.ReadValue<Vector2>().x;
-
-        // float horizontalInput = Input.GetAxis("Horizontal");
-        // movimenta o player para esquerda e direita a partir da entrada do usuario
+        float horizontalInput = moveAction.ReadValue<Vector2>().x;
+        // movimenta o player para esquerda e direita a partir da entrada do usu�rio
         transform.Translate(Vector3.right * speed * Time.deltaTime * horizontalInput);
-        // mantém o player dentro dos limites do jogo (eixo x)
+        // mant�m o player dentro dos limites do jogo (eixo x)
         if (transform.position.x < -xRange)
         {
             transform.position = new Vector3(-xRange, transform.position.y, transform.position.y);
@@ -40,45 +48,27 @@ public class PlayerController : MonoBehaviour
         {
             transform.position = new Vector3(xRange, transform.position.y, transform.position.y);
         }
-    
-      
-        
-    }
-    public void MoveEvent(InputAction.CallbackContext context)
-    {
-        horizontalInput = context.ReadValue<Vector2>().x;
-    }
-    public void FireEvent(InputAction.CallbackContext context)
-    {
-        Debug.Log("Dispara pezza");
-         Instantiate(projectilePrefab, transform.position, projectilePrefab.transform.rotation);
-    }
-
-    private void OnEnable()
-    {
-        inputAction.FindActionMap("Player").Enable();
-    }
-
-    private void OnDisable()
-    {
-        inputAction.FindActionMap("Player").Disable();
-    }
-
-    private void PauseOn()
-   {
-         if (Pausa.WasPressedThisFrame())
+        if(fireAction.WasPressedThisFrame())
         {
-            panel.SetActive(true);
+            Instantiate(projectilePrefab, transform.position, projectilePrefab.transform.rotation);
+
+        }
+        PauseGame();
+       
+}
+void PauseGame()
+    {
+         if (pausaActionPlayer.WasPressedThisFrame())
+        {
+            painel.SetActive(true);
             InputActions.FindActionMap("Player").Disable(); 
             InputActions.FindActionMap("UI").Enable(); 
         }
-        if (Pausa.WasPressedThisFrame())
+        if (pausaActionUI.WasPressedThisFrame())
         {
-            panel.SetActive(false);
+            painel.SetActive(false);
             InputActions.FindActionMap("Player").Enable(); 
             InputActions.FindActionMap("UI").Disable(); 
         }
     }
-    
-}
-
+    }

@@ -591,7 +591,7 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "Pausa",
+                    "name": "UIPausa",
                     "type": "Button",
                     "id": "762d8cc5-a43e-4690-a56d-22258271a6fb",
                     "expectedControlType": "",
@@ -1026,7 +1026,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Pausa",
+                    "action": "UIPausa",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
