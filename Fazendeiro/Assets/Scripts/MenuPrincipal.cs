@@ -15,6 +15,19 @@ public class MenuPrincipal : MonoBehaviour
         SceneManager.LoadScene("Jogar");
     }
 
+    public void GameOver()
+    {
+        SceneManager.LoadScene("GameOver");
+    }
+
+    public void Victory()
+    {
+        SceneManager.LoadScene("Victory");
+    }
+      public void Menu()
+    {
+        SceneManager.LoadScene("Menu");
+    }
     public void AbrirOpcoes()
     {
         PainelMenuInicial.SetActive(false);
