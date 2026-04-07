@@ -95,6 +95,15 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "Ghost",
+                    "type": "Button",
+                    "id": "99bbb771-5089-4b72-9acb-b692b741f7d6",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -493,6 +502,17 @@
                     "action": "Menu",
                     "isComposite": false,
                     "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "34bfb15e-695f-4089-ab6b-2776a99225ed",
+                    "path": "<Keyboard>/leftCtrl",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Ghost",
+                    "isComposite": false,
+                    "isPartOfComposite": false
                 }
             ]
         },
@@ -594,6 +614,15 @@
                     "name": "UIMenu",
                     "type": "Button",
                     "id": "762d8cc5-a43e-4690-a56d-22258271a6fb",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "UIGhost",
+                    "type": "Button",
+                    "id": "a1aa9517-979d-4bcc-8f4b-6f3c5ffa6ba5",
                     "expectedControlType": "",
                     "processors": "",
                     "interactions": "",
@@ -1027,6 +1056,17 @@
                     "processors": "",
                     "groups": "",
                     "action": "UIMenu",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "dcad3b8d-8dc8-476b-afc1-338fa14876e1",
+                    "path": "<Keyboard>/leftCtrl",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "UIGhost",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
