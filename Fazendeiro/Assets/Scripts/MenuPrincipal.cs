@@ -9,7 +9,7 @@ public class MenuPrincipal : MonoBehaviour
     [SerializeField] private GameObject PainelMenuInicial;
     [SerializeField] private GameObject PainelOpcoes;
     [SerializeField] private GameObject PainelConfirmarSaida;
-
+    [SerializeField] private GameObject PainelPausa;
     public void Jogar()
     {
         SceneManager.LoadScene("Jogar");
@@ -33,7 +33,10 @@ public class MenuPrincipal : MonoBehaviour
         PainelMenuInicial.SetActive(false);
         PainelOpcoes.SetActive(true);
     }
-
+    public void AbrirPause()
+    {
+        PainelPausa.SetActive(true);
+    }
     public void FecharOpcoes()
     {
         PainelOpcoes.SetActive(false);

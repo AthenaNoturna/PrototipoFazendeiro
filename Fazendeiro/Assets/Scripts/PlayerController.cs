@@ -13,8 +13,8 @@ public class PlayerController1 : MonoBehaviour
     public InputActionAsset InputActions;
     private InputAction moveAction;
     private InputAction fireAction;
-    private InputAction pausaActionPlayer;
-    private InputAction pausaActionUI;
+    private InputAction menuActionPlayer;
+    private InputAction menuActionUI;
     public GameObject painel;
 
     // Update is called once per frame  
@@ -31,8 +31,8 @@ public class PlayerController1 : MonoBehaviour
     {
         moveAction = InputSystem.actions.FindAction("Move");
         fireAction = InputSystem.actions.FindAction("Jump");
-        pausaActionPlayer = InputSystem.actions.FindAction("Pausa");
-        pausaActionUI = InputSystem.actions.FindAction("UIPausa");
+        menuActionPlayer = InputSystem.actions.FindAction("Menu");
+        menuActionUI = InputSystem.actions.FindAction("UIMenu");
     }
     void Update()
     {
@@ -53,18 +53,18 @@ public class PlayerController1 : MonoBehaviour
             Instantiate(projectilePrefab, transform.position, projectilePrefab.transform.rotation);
 
         }
-        PauseGame();
+        MenuGame();
        
 }
-void PauseGame()
+void MenuGame()
     {
-         if (pausaActionPlayer.WasPressedThisFrame())
+         if (menuActionPlayer.WasPressedThisFrame())
         {
             painel.SetActive(true);
             InputActions.FindActionMap("Player").Disable(); 
             InputActions.FindActionMap("UI").Enable(); 
         }
-        if (pausaActionUI.WasPressedThisFrame())
+        if (menuActionUI.WasPressedThisFrame())
         {
             painel.SetActive(false);
             InputActions.FindActionMap("Player").Enable(); 
