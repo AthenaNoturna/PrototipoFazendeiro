@@ -5,7 +5,7 @@ public class PlayerStats : MonoBehaviour
 {
     public int life = 3;
 
-    public GameObject[] hearts; // arrasta os 3 corações aqui no Inspector
+    public GameObject[] hearts; 
 
     public void TakeDamage()
     {
