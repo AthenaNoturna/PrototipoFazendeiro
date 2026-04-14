@@ -18,7 +18,7 @@ public void AddScore(int value)
 {
     score += value;
 
-    scoreText.text = "Pontos: " + score;
+    scoreText.text = "PONTOS: " + score;
 
     if (score >= winScore)
     {

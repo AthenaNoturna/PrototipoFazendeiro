@@ -19,6 +19,8 @@ public class PlayerController1 : MonoBehaviour
     private InputAction ghostAction;
     private bool isGhost = false;
     private Renderer playerRenderer;
+    public int pizzaCount = 5;
+    public int maxPizza = 10;
 
     // Update is called once per frame  
     private void OnEnable()
@@ -27,9 +29,9 @@ public class PlayerController1 : MonoBehaviour
     }
     private void OnDisable()
     {
-        InputActions.FindActionMap("Player").Disable(); 
+        InputActions.FindActionMap("Player").Disable();
     }
-    
+
     private void Awake()
     {
         moveAction = InputSystem.actions.FindAction("Move");
@@ -53,63 +55,65 @@ public class PlayerController1 : MonoBehaviour
         {
             transform.position = new Vector3(xRange, transform.position.y, transform.position.y);
         }
-        if(fireAction.WasPressedThisFrame())
-        {
-            Instantiate(projectilePrefab, transform.position, projectilePrefab.transform.rotation);
+        if (fireAction.WasPressedThisFrame() && pizzaCount > 0)
+    {
+    Instantiate(projectilePrefab, transform.position, projectilePrefab.transform.rotation);
 
-        }
+    pizzaCount--; 
+    FindFirstObjectByType<UIManager>().UpdatePizzaUI(pizzaCount);
+    }
         MenuGame();
 
         if (ghostAction.WasPressedThisFrame() && !isGhost)
         {
             StartCoroutine(GhostMode());
         }
-       
-}
-   void MenuGame()
-{
-    if (menuActionPlayer.WasPressedThisFrame())
-    {
-        painel.SetActive(true);
 
-        Time.timeScale = 0f; 
-
-        InputActions.FindActionMap("Player").Disable(); 
-        InputActions.FindActionMap("UI").Enable(); 
     }
-
-    if (menuActionUI.WasPressedThisFrame())
+    void MenuGame()
     {
-        painel.SetActive(false);
+        if (menuActionPlayer.WasPressedThisFrame())
+        {
+            painel.SetActive(true);
 
-        Time.timeScale = 1f; 
+            Time.timeScale = 0f;
 
-        InputActions.FindActionMap("Player").Enable(); 
-        InputActions.FindActionMap("UI").Disable(); 
+            InputActions.FindActionMap("Player").Disable();
+            InputActions.FindActionMap("UI").Enable();
+        }
+
+        if (menuActionUI.WasPressedThisFrame())
+        {
+            painel.SetActive(false);
+
+            Time.timeScale = 1f;
+
+            InputActions.FindActionMap("Player").Enable();
+            InputActions.FindActionMap("UI").Disable();
+        }
     }
-}
 
     IEnumerator GhostMode()
-{
-    isGhost = true;
+    {
+        isGhost = true;
 
-    playerRenderer.enabled = false;
+        playerRenderer.enabled = false;
 
-    yield return new WaitForSeconds(2f);
+        yield return new WaitForSeconds(2f);
 
-    playerRenderer.enabled = true;
-    isGhost = false;
-}
+        playerRenderer.enabled = true;
+        isGhost = false;
+    }
     public bool IsGhost()
-    {   
-    return isGhost;
+    {
+        return isGhost;
     }
 
     public void ActivateGhostButton()
     {
-    if (!isGhost)
-    {
-        StartCoroutine(GhostMode());
+        if (!isGhost)
+        {
+            StartCoroutine(GhostMode());
+        }
     }
-    }
- }
+}
