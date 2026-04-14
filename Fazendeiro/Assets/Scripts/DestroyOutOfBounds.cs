@@ -23,10 +23,11 @@ public class DestroyOutOfBounds : MonoBehaviour
             Destroy(gameObject);
         }
         if (transform.position.z < lowerBound)
-        {
-            Destroy(gameObject);
-            Exit();
-        }
+    {
+    ScoreManager.instance.AddScore(-1);
+
+    Destroy(gameObject);
+    }
     }
 
     public void Exit()

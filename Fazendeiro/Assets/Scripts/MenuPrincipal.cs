@@ -35,7 +35,16 @@ public class MenuPrincipal : MonoBehaviour
     }
     public void AbrirPause()
     {
-        PainelPausa.SetActive(true);
+    PainelPausa.SetActive(true);
+
+    Time.timeScale = 0f;
+    }
+   
+    public void FecharPause()
+    {
+    PainelPausa.SetActive(false);
+
+    Time.timeScale = 1f;
     }
     public void FecharOpcoes()
     {

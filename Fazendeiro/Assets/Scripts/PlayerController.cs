@@ -16,6 +16,9 @@ public class PlayerController1 : MonoBehaviour
     private InputAction menuActionPlayer;
     private InputAction menuActionUI;
     public GameObject painel;
+    private InputAction ghostAction;
+    private bool isGhost = false;
+    private Renderer playerRenderer;
 
     // Update is called once per frame  
     private void OnEnable()
@@ -33,6 +36,8 @@ public class PlayerController1 : MonoBehaviour
         fireAction = InputSystem.actions.FindAction("Jump");
         menuActionPlayer = InputSystem.actions.FindAction("Menu");
         menuActionUI = InputSystem.actions.FindAction("UIMenu");
+        ghostAction = InputSystem.actions.FindAction("Ghost");
+        playerRenderer = GetComponentInChildren<Renderer>();
     }
     void Update()
     {
@@ -54,21 +59,57 @@ public class PlayerController1 : MonoBehaviour
 
         }
         MenuGame();
+
+        if (ghostAction.WasPressedThisFrame() && !isGhost)
+        {
+            StartCoroutine(GhostMode());
+        }
        
 }
-void MenuGame()
+   void MenuGame()
+{
+    if (menuActionPlayer.WasPressedThisFrame())
     {
-         if (menuActionPlayer.WasPressedThisFrame())
-        {
-            painel.SetActive(true);
-            InputActions.FindActionMap("Player").Disable(); 
-            InputActions.FindActionMap("UI").Enable(); 
-        }
-        if (menuActionUI.WasPressedThisFrame())
-        {
-            painel.SetActive(false);
-            InputActions.FindActionMap("Player").Enable(); 
-            InputActions.FindActionMap("UI").Disable(); 
-        }
+        painel.SetActive(true);
+
+        Time.timeScale = 0f; 
+
+        InputActions.FindActionMap("Player").Disable(); 
+        InputActions.FindActionMap("UI").Enable(); 
+    }
+
+    if (menuActionUI.WasPressedThisFrame())
+    {
+        painel.SetActive(false);
+
+        Time.timeScale = 1f; 
+
+        InputActions.FindActionMap("Player").Enable(); 
+        InputActions.FindActionMap("UI").Disable(); 
+    }
+}
+
+    IEnumerator GhostMode()
+{
+    isGhost = true;
+
+    playerRenderer.enabled = false;
+
+    yield return new WaitForSeconds(2f);
+
+    playerRenderer.enabled = true;
+    isGhost = false;
+}
+    public bool IsGhost()
+    {   
+    return isGhost;
+    }
+
+    public void ActivateGhostButton()
+    {
+    if (!isGhost)
+    {
+        StartCoroutine(GhostMode());
     }
     }
+ }

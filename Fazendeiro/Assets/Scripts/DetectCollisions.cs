@@ -17,8 +17,21 @@ public class DetectCollisions : MonoBehaviour
     }
 
     private void OnTriggerEnter(Collider other)
+{
+    if (other.CompareTag("Animal"))
     {
-        Destroy(gameObject);
+        PlayerStats player = GetComponent<PlayerStats>();
+        PlayerController1 controller = GetComponent<PlayerController1>();
+
+        if (player != null && controller != null)
+        {
+            if (!controller.IsGhost())
+            {
+                player.TakeDamage();
+            }
+        }
+
         Destroy(other.gameObject);
     }
+}
 }
