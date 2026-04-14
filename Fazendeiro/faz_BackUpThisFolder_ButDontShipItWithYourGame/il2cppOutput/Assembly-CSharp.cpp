@@ -5686,7 +5686,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void PizzaSpawner_Start_mA19947CE2CE6C096F4E7
 	}
 	{
 		//<source_info:C:/PrototipoFazendeiro/Fazendeiro/Assets/Scripts/PizzaSpawner.cs:11>
-		MonoBehaviour_InvokeRepeating_mF208501E0E4918F9168BBBA5FC50D8F80D01514D(__this, _stringLiteralE32D8F17A3C251A78D51802D062BF758FB1ACDFE, (1.0f), (1.5f), NULL);
+		MonoBehaviour_InvokeRepeating_mF208501E0E4918F9168BBBA5FC50D8F80D01514D(__this, _stringLiteralE32D8F17A3C251A78D51802D062BF758FB1ACDFE, (1.0f), (1.0f), NULL);
 		//<source_info:C:/PrototipoFazendeiro/Fazendeiro/Assets/Scripts/PizzaSpawner.cs:12>
 		return;
 	}
