@@ -8,7 +8,7 @@ public class PizzaSpawner : MonoBehaviour
 
     void Start()
     {
-        InvokeRepeating("SpawnPizza", 1f, 1.5f);
+        InvokeRepeating("SpawnPizza", 1f, 1f);
     }
 
     void SpawnPizza()
