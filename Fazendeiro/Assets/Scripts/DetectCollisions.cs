@@ -28,10 +28,10 @@ public class DetectCollisions : MonoBehaviour
             if (!controller.IsGhost())
             {
                 player.TakeDamage();
+            Destroy(other.gameObject);
             }
         }
 
-        Destroy(other.gameObject);
     }
 }
 }
